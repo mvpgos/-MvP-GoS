@@ -362,10 +362,10 @@ end
 
 function GAnnie:UpdateBuff(unit, buff)
     if unit == myHero and unit.dead == false then
-      if buff.Name == "pyromania" then
+      if buff.Name:lower() == "pyromania" then
         self.passive = buff.Count
       end
-      if buff.Name == "pyromania_particle" then
+      if buff.Name:lower() == "pyromania_particle" then
         self.stun = true
       end
     end
@@ -373,10 +373,10 @@ end
 
 function GAnnie:RemoveBuff(unit, buff)
     if unit == myHero and unit.dead == false then
-      if buff.Name == "pyromania" then
+      if buff.Name:lower() == "pyromania" then
         self.passive = 0
       end
-      if buff.Name == "pyromania_particle" then
+      if buff.Name:lower() == "pyromania_particle" then
         self.stun = false
       end
     end
