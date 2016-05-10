@@ -2,7 +2,7 @@ local ver = "0.1"
 
 function AutoUpdate(data)
     if tonumber(data) > tonumber(ver) then
-        PrintChat("New AnnieGod Script Version Found " .. data)
+        PrintChat("New |MvP| AnnieGod Script Version Found " .. data)
         PrintChat("Downloading update, please wait...")
         DownloadFileAsync("https://raw.githubusercontent.com/mvpgos/-MvP-GoS/master/MvPChampions/AnnieGod.lua", SCRIPT_PATH .. "AnnieGod.lua", function() PrintChat("Update Complete, please 2x F6!") return end)
     else
@@ -53,8 +53,8 @@ function GAnnie:LoadValues()
 end
 
 function GAnnie:CreateMenu()
-  self.cfg = MenuConfig("GAnnie", "God Annie Rework")
-    self.cfg:Info("info", "Script Version: 0.01")
+  self.cfg = MenuConfig("GAnnie", "|MvP| God Annie ")
+    self.cfg:Info("info", "Script Version: "..ver.."")
 
     --[[ Combo Menu ]]--
     self.cfg:Menu("cb", "Combo")
