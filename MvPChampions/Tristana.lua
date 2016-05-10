@@ -1,8 +1,8 @@
 local version = 0.1
 function AutoUpdate(data)
     if tonumber(data) > tonumber(version) then
-        PrintChat("New TAOS Version Found " .. data)
-        PrintChat("Downloading TAOS update, please wait...")
+        PrintChat("New Version Found " .. data)
+        PrintChat("Downloading update, please wait...")
         DownloadFileAsync("https://raw.githubusercontent.com/mvpgos/-MvP-GoS/master/MvPChampions/Tristana.lua", SCRIPT_PATH .. "BNN Tristana.lua", function() PrintChat(string.format("<font color=\"#FC5743\"><b>Script Downloaded succesfully. please 2x f6</b></font>")) return end)
     end
 end
