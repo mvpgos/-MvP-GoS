@@ -16,7 +16,7 @@ class "Ahri"
                         
                         require("DamageLib")
                         
-                        version = "0.01"
+                        version = "0.02"
                         
                         self:Update()
                         
@@ -59,12 +59,8 @@ class "Ahri"
                 function Ahri:Combo()
                 
                         local range = 0
-                        
-                        if menu.com.rset.a:Value() and GetCastLevel(myHero, _R) ~= 0 and CanUseSpell(myHero, _R) ~= ONCOOLDOWN then
-                        
-                                range = menu.com.rset.rran:Value()
                                 
-                        elseif Ready(_E) then
+                        if Ready(_E) then
                         
                                 range = menu.com.eset.eran:Value()
                                 
@@ -266,7 +262,7 @@ class "Ahri"
                 
                 function Ahri:CastR(unit, mode, modee)
                 
-                        if Ready(_R) then
+                        if Ready(_R) and menu.com.rset:Value() and unit ~= nil then
                         
                                 if mode == 1 then
                                 
@@ -429,7 +425,7 @@ class "Ahri"
                 
                         if GetLevelPoints(myHero) ~= 0 then
                         
-                                DelayAction(function() LevelSpell(lvlup[GetLevel(myHero) - GetLevelPoints(myHero) + 1]) end, math.random(1.247,1.742))
+                                DelayAction(function() LevelSpell(lvlup[GetLevel(myHero)]) end, math.random(1.247,1.742))
                                 
                         end
                         
@@ -798,11 +794,7 @@ class "Ahri"
                         
                                 local range = 0
                                 
-                                if menu.com.rset.a:Value() and GetCastLevel(myHero, _R) ~= 0 and CanUseSpell(myHero, _R) ~= ONCOOLDOWN and menu.com.rset.modee:Value() == 1 then
-                                
-                                        range = menu.com.rset.rran:Value()
-                                        
-                                elseif Ready(_E) then
+                                if Ready(_E) then
                                 
                                         range = menu.com.eset.eran:Value()
                                         
@@ -922,8 +914,6 @@ class "Ahri"
                                                 menu.com.rset:DropDown("modee", "Second Settings", 2, {"Always", "Only If Killable [dmg calc Q, W, E, R, AA]"})
                                                 
                                                 menu.com.rset:Slider("sran", "Safe Mode: Distance: ", 475, 100, 575)
-                                                
-                                                menu.com.rset:Slider("rran", "Range: ", 1050, 500, 1050)
                                                 
                                 menu:SubMenu("har", "Harass")
                                 
