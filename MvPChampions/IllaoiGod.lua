@@ -289,13 +289,13 @@ IllaoiMenu:SubMenu("Awareness", "["..myHero.charName.."] - Awareness Settings")
 	end
 
 	OnCreateObj(function(Object)
-		if GetObjectType(Object) == Obj_AI_Turret then
+	if GetObjectType(Object) == Obj_AI_Turret then
       		table.insert(turrets, Object)
     	end
     end)
 
     OnObjectLoad(function(Object)
-		if GetObjectType(Object) == Obj_AI_Turret then
+	if GetObjectType(Object) == Obj_AI_Turret then
       		table.insert(turrets, Object)
     	end
     end)
