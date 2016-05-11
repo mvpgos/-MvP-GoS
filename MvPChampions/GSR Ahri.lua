@@ -16,7 +16,7 @@ class "Ahri"
                         
                         require("DamageLib")
                         
-                        version = "0.02"
+                        version = "0.03"
                         
                         self:Update()
                         
@@ -57,39 +57,35 @@ class "Ahri"
         -- C O M B O :
         
                 function Ahri:Combo()
-                
-                        local range = 0
                                 
-                        if Ready(_E) then
+                        local etarget = Ahri:GetTarget(menu.com.eset.eran:Value())
                         
-                                range = menu.com.eset.eran:Value()
-                                
-                        elseif Ready(_Q) then
+                        if etarget ~= nil then
                         
-                                range = menu.com.qset.qran:Value()
-                        
-                        elseif Ready(_W) then
-                        
-                                range = menu.com.wset.wran:Value()
-                                
-                        end
-                        
-                        local target = Ahri:GetTarget(range)
-                        
-                        if target ~= nil then
-                                
-                                self:CastE(target, menu.com.eset.ehit:Value()/100)
-                                
-                                self:CastQ(target, menu.com.qset.qhit:Value()/100)
-                                
-                                self:CastW(target)
+                                self:CastE(etarget, menu.com.eset.ehit:Value()/100)
                                 
                                 if GetTickCount() > last_r + 1150 then
                                 
-                                        self:CastR(target, menu.com.rset.mode:Value(), menu.com.rset.modee:Value())
+                                        self:CastR(etarget, menu.com.rset.mode:Value(), menu.com.rset.modee:Value())
                                         
                                 end
                                 
+                        end
+                        
+                        local qtarget = Ahri:GetTarget(menu.com.qset.qran:Value())
+                        
+                        if qtarget ~= nil then
+                        
+                                self:CastQ(qtarget, menu.com.qset.qhit:Value()/100)
+                                
+                        end
+                        
+                        local wtarget = Ahri:GetTarget(menu.com.wset.wran:Value())
+                        
+                        if wtarget ~= nil then
+                        
+                                self:CastW(wtarget)
+                        
                         end
                         
                 end
