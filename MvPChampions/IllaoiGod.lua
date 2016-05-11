@@ -102,19 +102,19 @@ IllaoiMenu:SubMenu("SubReq", "["..myHero.charName.."] - AutoLevel Settings")
 IllaoiMenu:SubMenu("Awareness", "["..myHero.charName.."] - Awareness Settings")
     IllaoiMenu.Awareness:Boolean("AwarenessON", "Enable Awareness", true)
 
-	if heal then
-		IllaoiMenu:SubMenu("heal", "["..myHero.charName.."] - Summoner Heal")
-			IllaoiMenu.heal:Boolean("enable", "Use Heal", true)
-			IllaoiMenu.heal:Slider("health", "If My Health % is Less Than", 10, 0, 100)
-		if realheals then
-			IllaoiMenu.heal:Boolean("ally", "Also use on ally", false)
-		end
-	end
+if heal then
+IllaoiMenu:SubMenu("heal", "["..myHero.charName.."] - Summoner Heal")
+	IllaoiMenu.heal:Boolean("enable", "Use Heal", true)
+	IllaoiMenu.heal:Slider("health", "If My Health % is Less Than", 10, 0, 100)
+if realheals then
+	IllaoiMenu.heal:Boolean("ally", "Also use on ally", false)
+end
+end
 
-	if ignite then
-		IllaoiMenu:SubMenu("ignite", "["..myHero.charName.."] - Ignite Settings")
-			IllaoiMenu.ignite:DropDown("set", "Use Smart Ignite", 2, {"OFF", "Optimal", "Aggressive", "Very Aggressive"})	
-	end
+if ignite then
+IllaoiMenu:SubMenu("ignite", "["..myHero.charName.."] - Ignite Settings")
+	IllaoiMenu.ignite:DropDown("set", "Use Smart Ignite", 2, {"OFF", "Optimal", "Aggressive", "Very Aggressive"})	
+end
 
 	if GetCastName(myHero, SUMMONER_1):lower():find("summonerdot") then
 			Ignite.slot = SUMMONER_1
