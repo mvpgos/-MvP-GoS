@@ -74,8 +74,8 @@ IllaoiMenu:Menu("Harass", "["..myHero.charName.."] - Harass Settings")
 	IllaoiMenu.Harass:Boolean("harassE", "Use E on Harass", false)
 
 IllaoiMenu:SubMenu("ks", "["..myHero.charName.."] - KillSteal Settings")
-		IllaoiMenu.ks:Boolean("killSteal", "Use Smart Kill Steal", true)
-		IllaoiMenu.ks:Boolean("autoIgnite", "Auto Ignite", true)
+	IllaoiMenu.ks:Boolean("killSteal", "Use Smart Kill Steal", true)
+	IllaoiMenu.ks:Boolean("autoIgnite", "Auto Ignite", true)
 
 IllaoiMenu:SubMenu("drawing", "["..myHero.charName.."] - Draw Settings")	
 	IllaoiMenu.drawing:Boolean("mDraw", "Disable All Range Draws", false)
@@ -90,7 +90,7 @@ local str = {[0] = "Q", [1] = "W", [2] = "E", [3] = "R"}
 end
 
 IllaoiMenu:SubMenu("misc", "["..myHero.charName.."] - Misc Settings")
-		IllaoiMenu.misc:Slider("skinList", "Choose your skin",1, 1, 2)
+	IllaoiMenu.misc:Slider("skinList", "Choose your skin",1, 1, 2)
 
 IllaoiMenu:SubMenu("SubReq", "["..myHero.charName.."] - AutoLevel Settings")
     IllaoiMenu.SubReq:Boolean("LevelUp", "Level Up Skills", true)
