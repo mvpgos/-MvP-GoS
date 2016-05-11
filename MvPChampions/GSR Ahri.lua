@@ -262,7 +262,7 @@ class "Ahri"
                 
                 function Ahri:CastR(unit, mode, modee)
                 
-                        if Ready(_R) and menu.com.rset:Value() and unit ~= nil then
+                        if Ready(_R) and menu.com.rset.a:Value() and unit ~= nil then
                         
                                 if mode == 1 then
                                 
