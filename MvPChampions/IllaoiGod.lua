@@ -1,7 +1,8 @@
+
 require("OpenPredict")
 require("DamageLib")
 
-local version = "0.1"
+local version = "0.12"
 function AutoUpdate(data)
     if tonumber(data) > tonumber(version) then
         PrintChat("New Version Found " .. data)
@@ -121,13 +122,15 @@ IllaoiMenu:SubMenu("Awareness", "["..myHero.charName.."] - Awareness Settings")
 		end
 
 	function AutoSkillLevelUp()
-		if IllaoiMenu.SubReq.LevelUp:Value() and GetLevelPoints(myHero) >= 1 and GetLevel(myHero) >= IllaoiMenu.SubReq.Start_Level:Value() then
-	        if IllaoiMenu.SubReq.Humanizer:Value() then
-	            DelayAction(function() LevelSpell(LevelUpTable[IllaoiMenu.SubReq.autoLvl:Value()][GetLevel(myHero)-GetLevelPoints(myHero)+1]) end, math.random(0.3286,1.33250))
-	        else
-	            LevelSpell(LevelUpTable[IllaoiMenu.SubReq.autoLvl:Value()][GetLevel(myHero)-GetLevelPoints(myHero)+1])
-	        end
-	    end
+		if GetLevel(myHero) ~= 18 then
+			if IllaoiMenu.SubReq.LevelUp:Value() and GetLevelPoints(myHero) >= 1 and GetLevel(myHero) >= IllaoiMenu.SubReq.Start_Level:Value() then
+		        if IllaoiMenu.SubReq.Humanizer:Value() then
+		            DelayAction(function() LevelSpell(LevelUpTable[IllaoiMenu.SubReq.autoLvl:Value()][GetLevel(myHero)-GetLevelPoints(myHero)+1]) end, math.random(0.3286,1.33250))
+		        else
+		            LevelSpell(LevelUpTable[IllaoiMenu.SubReq.autoLvl:Value()][GetLevel(myHero)-GetLevelPoints(myHero)+1])
+		        end
+		    end
+		end
     end
 
 	function findClosestAlly(obj)
@@ -276,9 +279,12 @@ IllaoiMenu:SubMenu("Awareness", "["..myHero.charName.."] - Awareness Settings")
 				end
 		end
 	end
-
+	lastSkin = 0
 	function SkinChanger()
-		HeroSkinChanger(myHero, IllaoiMenu.misc.skinList:Value() -1)
+		if IllaoiMenu.misc.skinList:Value() ~= lastSkin then
+			lastSkin = IllaoiMenu.misc.skinList:Value()
+			HeroSkinChanger(myHero, IllaoiMenu.misc.skinList:Value() -1)
+		end
 	end
 
 	OnTick(function(myHero)
