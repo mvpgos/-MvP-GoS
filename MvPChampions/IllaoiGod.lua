@@ -305,12 +305,12 @@ IllaoiMenu:SubMenu("Awareness", "["..myHero.charName.."] - Awareness Settings")
 						end, 0.0901)
 				elseif GetDistance(target) < 450 then
 					CastE(target)
-						DelayAction(function() 
-							CastQ(target)
-								DelayAction(function()
-									CastW(target)
-								end, 0.10)
-						end, 0.055)
+					DelayAction(function() 
+						CastQ(target)
+						DelayAction(function()
+							CastW(target)
+						end, 0.10)
+					end, 0.055)
 					if GetLevel(myHero) > 6 and IllaoiMenu.Combo.rYes:Value() then
 						if Ready(3) and EnemiesAround(myHero, GetCastRange(myHero, 3)) >= IllaoiMenu.Combo.cEnemies:Value() then
 							for i,enemy in ipairs (GetEnemyHeroes()) do
