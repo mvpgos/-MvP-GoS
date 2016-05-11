@@ -18,7 +18,7 @@ class "Ahri"
                         
                         version = "0.01"
                         
-                        Update()
+                        self:Update()
                         
                         focus_target = nil
                         
@@ -980,7 +980,7 @@ class "Ahri"
                 
                         function AutoUpdate(data)
                         
-                            if tonumber(data) > tonumber(self.version) then
+                            if tonumber(data) > tonumber(version) then
                             
                                 PrintChat("New version found! " .. data)
                                 
@@ -990,7 +990,7 @@ class "Ahri"
                             
                             else
                             
-                                PrintChat(string.format("<font color='#b756c5'>|MvP| Ahri </font>").."updated ! Version: "..self.version)
+                                PrintChat(string.format("<font color='#b756c5'>|MvP| Ahri </font>").."updated ! Version: "..version)
                                 
                             end
                             
