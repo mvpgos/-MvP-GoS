@@ -340,3 +340,7 @@ IllaoiMenu:SubMenu("Awareness", "["..myHero.charName.."] - Awareness Settings")
 				end
 			end
 	end)
+
+
+	PrintChat(string.format("<font color=\"#85EDD7\"><b>Welcome " ..GetUser().. " .</b></font>"))
+	PrintChat(string.format("<font color=\"#FC5347\"><b>|MvP|: " ..GetObjectName(myHero).. " Loaded.</b></font>"))
