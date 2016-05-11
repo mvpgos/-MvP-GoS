@@ -106,9 +106,9 @@ if heal then
 IllaoiMenu:SubMenu("heal", "["..myHero.charName.."] - Summoner Heal")
 	IllaoiMenu.heal:Boolean("enable", "Use Heal", true)
 	IllaoiMenu.heal:Slider("health", "If My Health % is Less Than", 10, 0, 100)
-if realheals then
+    if realheals then
 	IllaoiMenu.heal:Boolean("ally", "Also use on ally", false)
-end
+    end
 end
 
 if ignite then
