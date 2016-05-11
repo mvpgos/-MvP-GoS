@@ -998,12 +998,3 @@ class "Ahri"
 -- I N I T I A L I Z E  C L A S S :
 
         _G[GetObjectName(myHero)]()
-        
-        
-        
-        
-        
-        
-        
-        
-        
