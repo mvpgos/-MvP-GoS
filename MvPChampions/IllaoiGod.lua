@@ -2,15 +2,16 @@
 require("OpenPredict")
 require("DamageLib")
 
+local version = "0.1"
 function AutoUpdate(data)
     if tonumber(data) > tonumber(version) then
         PrintChat("New Version Found " .. data)
         PrintChat("Downloading update, please wait...")
-        DownloadFileAsync("LuaFileHere", SCRIPT_PATH .. "Illaoi.lua", function() PrintChat(string.format("<font color=\"#FC5743\"><b>Script Downloaded succesfully. please 2x f6</b></font>")) return end)
+        DownloadFileAsync("https://raw.githubusercontent.com/mvpgos/-MvP-GoS/master/MvPChampions/IllaoiGod.lua", SCRIPT_PATH .. "Illaoi.lua", function() PrintChat(string.format("<font color=\"#FC5743\"><b>Script Downloaded succesfully. please 2x f6</b></font>")) return end)
     end
 end
 
-GetWebResultAsync("VersionFileHere", AutoUpdate) 
+GetWebResultAsync("https://raw.githubusercontent.com/mvpgos/-MvP-GoS/master/MvPChampions/IllaoiGod.version", AutoUpdate) 
 	LevelUpTable={
 			[1]={_Q,_W,_E,_W,_W,_R,_W,_Q,_W,_Q,_R,_Q,_Q,_W,_E,_R,_E,_E},
 
