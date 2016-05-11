@@ -90,7 +90,7 @@ local str = {[0] = "Q", [1] = "W", [2] = "E", [3] = "R"}
 end
 
 IllaoiMenu:SubMenu("misc", "["..myHero.charName.."] - Misc Settings")
-	IllaoiMenu.misc:Slider("skinList", "Choose your skin",1, 1, 2)
+	IllaoiMenu.misc:DropDown("skinList", "Choose your skin", 1, {"Clasic", "Void Bringer Illaoi"})
 
 IllaoiMenu:SubMenu("SubReq", "["..myHero.charName.."] - AutoLevel Settings")
     IllaoiMenu.SubReq:Boolean("LevelUp", "Level Up Skills", true)
@@ -186,6 +186,12 @@ IllaoiMenu:SubMenu("Awareness", "["..myHero.charName.."] - Awareness Settings")
 		end
 	end
 
+	function DrawCircleTarget()
+		if IllaoiMenu.drawing.Target:Value() then
+			DrawCircle(GetCurrentTarget().pos, 50, 3, 2, ARGB(190,233,68,51))
+		end
+	end
+
 	function CastQ(unit)
 		if unit ~= nil and GetDistance(unit) <= GetCastRange(myHero, 0) and Ready(0) then
 			local qPredInfo = { width = 150, delay = 0.75, speed = 3000, range = 850 }
@@ -233,7 +239,7 @@ IllaoiMenu:SubMenu("Awareness", "["..myHero.charName.."] - Awareness Settings")
 					CastR(target)
 				end
 				if IllaoiMenu.ks.autoIgnite:Value() then
-					AutoIgnite(target)
+					IgniteProperties(target)
 				end
 			end
 		end
@@ -323,6 +329,7 @@ IllaoiMenu:SubMenu("Awareness", "["..myHero.charName.."] - Awareness Settings")
 			SimpleAwareness()
 		end
 
+		DrawCircleTarget()
 		SkinChanger()
 
 		if not IllaoiMenu.drawing.mDraw:Value() then
