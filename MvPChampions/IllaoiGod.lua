@@ -42,6 +42,7 @@ GoSTracker("Illaoi",4)
 	}
 
 	turrets = {}
+	IllaoiTentacles = {}
 	Ignite = { name = "summonerdot", range = 600, slot = nil }
 	local sAllies = GetAllyHeroes()
 	function HealSlot()
@@ -65,8 +66,10 @@ IllaoiMenu:Menu("Combo", "["..myHero.charName.."] - Combo Settings")
 	IllaoiMenu.Combo:Boolean("cYes", "Enable Combo", true)
 	IllaoiMenu.Combo:Boolean("rYes", "Use R in combo", true)
 	IllaoiMenu.Combo:Boolean("cTurret", "Use combo if enemy is underturret", true)
+	IllaoiMenu.Combo:Boolean("tyes", "Only combo if tentacles are in range", false)
 	IllaoiMenu.Combo:Slider("cEnemies", "Minimum enemies around to cast R", 1, 1, 5)
 	IllaoiMenu.Combo:Slider("cLife", "Minimum % of life to cast R", 50, 1, 100)
+	PermaShow(IllaoiMenu.Combo.tyes)
 
 IllaoiMenu:Menu("Harass", "["..myHero.charName.."] - Harass Settings")
 	IllaoiMenu.Harass:KeyBinding("harassKey", "Combo Key", string.byte("C"))
@@ -103,17 +106,16 @@ IllaoiMenu:SubMenu("Awareness", "["..myHero.charName.."] - Awareness Settings")
     IllaoiMenu.Awareness:Boolean("AwarenessON", "Enable Awareness", true)
 
 if heal then
-IllaoiMenu:SubMenu("heal", "["..myHero.charName.."] - Summoner Heal")
-	IllaoiMenu.heal:Boolean("enable", "Use Heal", true)
-	IllaoiMenu.heal:Slider("health", "If My Health % is Less Than", 10, 0, 100)
-    if realheals then
-	IllaoiMenu.heal:Boolean("ally", "Also use on ally", false)
-    end
+	IllaoiMenu:SubMenu("heal", "["..myHero.charName.."] - Summoner Heal")
+		IllaoiMenu.heal:Boolean("enable", "Use Heal", true)
+		IllaoiMenu.heal:Slider("health", "If My Health % is Less Than", 10, 0, 100)
+	if realheals then
+		IllaoiMenu.heal:Boolean("ally", "Also use on ally", false)
+	end
 end
-
 if ignite then
-IllaoiMenu:SubMenu("ignite", "["..myHero.charName.."] - Ignite Settings")
-	IllaoiMenu.ignite:DropDown("set", "Use Smart Ignite", 2, {"OFF", "Optimal", "Aggressive", "Very Aggressive"})	
+	IllaoiMenu:SubMenu("ignite", "["..myHero.charName.."] - Ignite Settings")
+		IllaoiMenu.ignite:DropDown("set", "Use Smart Ignite", 2, {"OFF", "Optimal", "Aggressive", "Very Aggressive"})	
 end
 
 	if GetCastName(myHero, SUMMONER_1):lower():find("summonerdot") then
@@ -197,7 +199,7 @@ end
 
 	function CastQ(unit)
 		if unit ~= nil and GetDistance(unit) <= GetCastRange(myHero, 0) and Ready(0) then
-			local qPredInfo = { width = 150, delay = 0.75, speed = 3000, range = 850 }
+			local qPredInfo = { width = 170, delay = 0.75, speed = 3000, range = 850 }
 			local qPred = GetPrediction(unit, qPredInfo)
 			if qPred and qPred.hitChance >= 0.25 then
 		    	CastSkillShot(0, qPred.castPos)
@@ -259,7 +261,26 @@ end
 			CastE(target)
 		end
 	end
+--[[
+local AllReady
+	function AllReady()
+		if GetLevel(myHero) > 6 then
+			if Ready(0) and Ready(1) and Ready(2) and Ready(3) then
+				AllReady = true
+			else AllReady = false
+			end
+		end
+	end
 
+	function Inmune(unit1, unit2)
+		AllReady()
+		while AllReady == true do
+			if EnemiesAround(myHero, GetCastRange(myHero, 3)) >= 1 and IsInmune(unit1, unit2) == true then
+				return
+			end
+		end
+	end
+]]
 	function SimpleAwareness()
 		DrawCircle(myHero.pos, 2300, 1, 8, ARGB(140,34,122,155))
 		for _, enemy in pairs(GetEnemyHeroes()) do
@@ -289,23 +310,30 @@ end
 	end
 
 	OnCreateObj(function(Object)
-	if GetObjectType(Object) == Obj_AI_Turret then
+		if GetObjectType(Object) == Obj_AI_Turret then
       		table.insert(turrets, Object)
+    	end
+    	if GetObjectName(Object) == "IllaoiMinion" then
+    		table.insert(IllaoiTentacles, Object)
     	end
     end)
 
     OnObjectLoad(function(Object)
-	if GetObjectType(Object) == Obj_AI_Turret then
+		if GetObjectType(Object) == Obj_AI_Turret then
       		table.insert(turrets, Object)
+    	end
+    	if GetObjectName(Object) == "IllaoiMinion" then
+    		table.insert(IllaoiTentacles, Object)
     	end
     end)
 
     OnDeleteObj(function(Object)
-    	for k, v in pairs(turrets) do
     		if GetObjectType(Object) == Obj_AI_Turret then
-	        	table.remove(turrets, k)
+	        	table.remove(turrets, 1)
 	    	end
-	    end
+	    	if GetObjectName(Object) == "IllaoiMinion" then
+    			table.remove(IllaoiTentacles, 1)
+    		end
 	end)
 
 	OnTick(function(myHero)
@@ -318,23 +346,24 @@ end
 
 		if KeyIsDown(IllaoiMenu.Combo.comboKey:Key()) then
 			if IllaoiMenu.Combo.cYes:Value() then
-				if IllaoiMenu.Combo.cTurret:Value() then
+				if not IllaoiMenu.Combo.cTurret:Value() then
 					for k,v in ipairs(turrets) do
 						if GetDistance(target, v) < 1200 then
 							--PrintChat("No está en rango de torreta")
+							--Inmune(target, myHero)
 							if GetDistance(target) < 900 and GetDistance(target) > 450 then
 								CastQ(target)
-									DelayAction(function() 
-										CastE(target)
-									end, 0.0901)
+								DelayAction(function() 
+									CastE(target)
+								end, 0.0901)
 							elseif GetDistance(target) < 450 then
 								CastE(target)
-									DelayAction(function() 
-										CastQ(target)
-											DelayAction(function()
-												CastW(target)
-											end, 0.10)
-									end, 0.055)
+								DelayAction(function() 
+									CastQ(target)
+										DelayAction(function()
+											CastW(target)
+										end, 0.10)
+								end, 0.055)
 								if GetLevel(myHero) > 6 and IllaoiMenu.Combo.rYes:Value() then
 									if Ready(3) and EnemiesAround(myHero, GetCastRange(myHero, 3)) >= IllaoiMenu.Combo.cEnemies:Value() then
 										for i,enemy in ipairs (GetEnemyHeroes()) do
@@ -348,27 +377,61 @@ end
 							end 
 						end
 					end
-				else 
-					for k,v in ipairs(turrets) do
-						if not  GetDistance(target, v) > 1200 then
-							if GetDistance(target) < 900 and GetDistance(target) > 450 then
-								CastQ(target)
-									DelayAction(function() 
+				else
+					if IllaoiMenu.Combo.tyes:Value() then
+						for i,v in ipairs(IllaoiTentacles) do
+							if GetDistance(myHero, v) < 1200 then
+								for k,v in ipairs(turrets) do
+									if GetDistance(target, v) > 1200 then
+										if GetDistance(target) < 900 and GetDistance(target) > 450 then
+											CastQ(target)
+											DelayAction(function()
+												CastE(target)
+											end, 0.0901)
+										elseif GetDistance(target) < 450 then
+											CastE(target)
+											DelayAction(function()
+												CastQ(target)
+													DelayAction(function()
+														CastW(target)
+													end, 0.10)
+											end, 0.055)
+											if GetLevel(myHero) > 6 and IllaoiMenu.Combo.rYes:Value() then
+												if Ready(3) and EnemiesAround(myHero, GetCastRange(myHero, 3)) >= IllaoiMenu.Combo.cEnemies:Value() then
+													for i,enemy in ipairs (GetEnemyHeroes()) do
+														if not enemy.dead and GetPercentHP(enemy) < IllaoiMenu.Combo.cLife:Value() then
+															CastR(target)
+														end
+													end
+												end
+											end
+										end
+									end
+								end
+							end
+						end
+					else
+						for k,v in ipairs(turrets) do
+							if GetDistance(target, v) > 1200 then
+								if GetDistance(target) < 900 and GetDistance(target) > 450 then
+									CastQ(target)
+									DelayAction(function()
 										CastE(target)
 									end, 0.0901)
-							elseif GetDistance(target) < 450 then
-								CastE(target)
-									DelayAction(function() 
+								elseif GetDistance(target) < 450 then
+									CastE(target)
+									DelayAction(function()
 										CastQ(target)
 											DelayAction(function()
 												CastW(target)
 											end, 0.10)
 									end, 0.055)
-								if GetLevel(myHero) > 6 and IllaoiMenu.Combo.rYes:Value() then
-									if Ready(3) and EnemiesAround(myHero, GetCastRange(myHero, 3)) >= IllaoiMenu.Combo.cEnemies:Value() then
-										for i,enemy in ipairs (GetEnemyHeroes()) do
-											if not enemy.dead and GetPercentHP(enemy) < IllaoiMenu.Combo.cLife:Value() then
-												CastR(target)
+									if GetLevel(myHero) > 6 and IllaoiMenu.Combo.rYes:Value() then
+										if Ready(3) and EnemiesAround(myHero, GetCastRange(myHero, 3)) >= IllaoiMenu.Combo.cEnemies:Value() then
+											for i,enemy in ipairs (GetEnemyHeroes()) do
+												if not enemy.dead and GetPercentHP(enemy) < IllaoiMenu.Combo.cLife:Value() then
+													CastR(target)
+												end
 											end
 										end
 									end
@@ -384,6 +447,14 @@ end
 		end
 	end)
 	OnDraw(function()
+		--[[ TESTING PURPOSES
+		for k,v in ipairs(IllaoiTentacles) do            
+			if GetDistance(myHero, v) < 1200 then 
+				if not v.dead then               
+					DrawCircle(v.pos, 16, 2,100, GoS.Red)
+				end
+			end
+		end]]
 		if IllaoiMenu.Awareness.AwarenessON:Value() then
 			SimpleAwareness()
 		end
