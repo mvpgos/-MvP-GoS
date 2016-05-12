@@ -309,32 +309,32 @@ local AllReady
 		end
 	end
 
-	OnCreateObj(function(Object)
-		if GetObjectType(Object) == Obj_AI_Turret then
+OnCreateObj(function(Object)
+	if GetObjectType(Object) == Obj_AI_Turret then
       		table.insert(turrets, Object)
     	end
     	if GetObjectName(Object) == "IllaoiMinion" then
     		table.insert(IllaoiTentacles, Object)
     	end
-    end)
+end)
 
-    OnObjectLoad(function(Object)
-		if GetObjectType(Object) == Obj_AI_Turret then
+OnObjectLoad(function(Object)
+	if GetObjectType(Object) == Obj_AI_Turret then
       		table.insert(turrets, Object)
     	end
     	if GetObjectName(Object) == "IllaoiMinion" then
     		table.insert(IllaoiTentacles, Object)
     	end
-    end)
+end)
 
-    OnDeleteObj(function(Object)
-    		if GetObjectType(Object) == Obj_AI_Turret then
-	        	table.remove(turrets, 1)
-	    	end
-	    	if GetObjectName(Object) == "IllaoiMinion" then
-    			table.remove(IllaoiTentacles, 1)
-    		end
-	end)
+OnDeleteObj(function(Object)
+    	if GetObjectType(Object) == Obj_AI_Turret then
+	       table.remove(turrets, 1)
+	end
+	if GetObjectName(Object) == "IllaoiMinion" then
+    		table.remove(IllaoiTentacles, 1)
+    	end
+end)
 
 	OnTick(function(myHero)
 		Ignite.ready = (Ignite.slot ~= nil and myHero:CanUseSpell(Ignite.slot) == READY)
