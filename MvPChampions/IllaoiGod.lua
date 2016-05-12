@@ -5,7 +5,7 @@ require("DamageLib")
 local version = "0.13"
 function AutoUpdate(data)
     if tonumber(data) > tonumber(version) then
-        PrintChat("New Version Found " .. data)
+        PrintChat("New Illaoi Version Found " .. data)
         PrintChat("Downloading update, please wait...")
         DownloadFileAsync("https://raw.githubusercontent.com/mvpgos/-MvP-GoS/master/MvPChampions/IllaoiGod.lua", SCRIPT_PATH .. "Illaoi.lua", function() PrintChat(string.format("<font color=\"#FC5743\"><b>Script Downloaded succesfully. please 2x f6</b></font>")) return end)
     end
@@ -309,32 +309,32 @@ local AllReady
 		end
 	end
 
-OnCreateObj(function(Object)
-	if GetObjectType(Object) == Obj_AI_Turret then
+	OnCreateObj(function(Object)
+		if GetObjectType(Object) == Obj_AI_Turret then
       		table.insert(turrets, Object)
     	end
     	if GetObjectName(Object) == "IllaoiMinion" then
     		table.insert(IllaoiTentacles, Object)
     	end
-end)
+    end)
 
-OnObjectLoad(function(Object)
-	if GetObjectType(Object) == Obj_AI_Turret then
+    OnObjectLoad(function(Object)
+		if GetObjectType(Object) == Obj_AI_Turret then
       		table.insert(turrets, Object)
     	end
     	if GetObjectName(Object) == "IllaoiMinion" then
     		table.insert(IllaoiTentacles, Object)
     	end
-end)
+    end)
 
-OnDeleteObj(function(Object)
-    	if GetObjectType(Object) == Obj_AI_Turret then
-	       table.remove(turrets, 1)
-	end
-	if GetObjectName(Object) == "IllaoiMinion" then
-    		table.remove(IllaoiTentacles, 1)
-    	end
-end)
+    OnDeleteObj(function(Object)
+    		if GetObjectType(Object) == Obj_AI_Turret then
+	        	table.remove(turrets, 1)
+	    	end
+	    	if GetObjectName(Object) == "IllaoiMinion" then
+    			table.remove(IllaoiTentacles, 1)
+    		end
+	end)
 
 	OnTick(function(myHero)
 		Ignite.ready = (Ignite.slot ~= nil and myHero:CanUseSpell(Ignite.slot) == READY)
@@ -392,9 +392,9 @@ end)
 											CastE(target)
 											DelayAction(function()
 												CastQ(target)
-													DelayAction(function()
-														CastW(target)
-													end, 0.10)
+												DelayAction(function()
+													CastW(target)
+												end, 0.10)
 											end, 0.055)
 											if GetLevel(myHero) > 6 and IllaoiMenu.Combo.rYes:Value() then
 												if Ready(3) and EnemiesAround(myHero, GetCastRange(myHero, 3)) >= IllaoiMenu.Combo.cEnemies:Value() then
