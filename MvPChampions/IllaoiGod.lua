@@ -311,20 +311,20 @@ local AllReady
 
 	OnCreateObj(function(Object)
 		if GetObjectType(Object) == Obj_AI_Turret then
-      		table.insert(turrets, Object)
-    	end
-    	if GetObjectName(Object) == "IllaoiMinion" then
-    		table.insert(IllaoiTentacles, Object)
-    	end
-    end)
+      			table.insert(turrets, Object)
+    		end
+    		if GetObjectName(Object) == "IllaoiMinion" then
+    			table.insert(IllaoiTentacles, Object)
+    		end
+	end)
 
     OnObjectLoad(function(Object)
 		if GetObjectType(Object) == Obj_AI_Turret then
-      		table.insert(turrets, Object)
-    	end
-    	if GetObjectName(Object) == "IllaoiMinion" then
-    		table.insert(IllaoiTentacles, Object)
-    	end
+      			table.insert(turrets, Object)
+    		end
+    		if GetObjectName(Object) == "IllaoiMinion" then
+    			table.insert(IllaoiTentacles, Object)
+    		end
     end)
 
     OnDeleteObj(function(Object)
