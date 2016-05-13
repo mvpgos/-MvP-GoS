@@ -1,4 +1,4 @@
-local version = "0.03"
+local version = "0.04"
 function AutoUpdate(data)
     if tonumber(data) > tonumber(version) then
         PrintChat("New Twisted Fate Version Found " .. data)
@@ -17,11 +17,16 @@ local botaBasica = 0
 local botaRapidaQueFlipas = 0
 
 menu = MenuConfig("ThatBot", "|MvP|SuicideBot")
+menu:Menu("Input", "Block Input")
+menu.Input:Boolean("BlIn", "Block Input", false)
 menu:Menu("S", "Info and more")
 menu.S:Info("Ver", "Current Version: "..version.."")
 menu.S:Info("s", "Have Fun using this bot")
 
 OnTick(function(myHero)
+	if menu.Input.BlIn:Value() then
+		BlockInput(true)
+	end
 
 	if not myHero.dead then
 		--[[
@@ -64,14 +69,17 @@ OnDraw(function(myHero)
 	DrawCircle(myHero.pos, 350, 1,32,GoS.Red)
 end)
 
+--[[
 OnWndMsg(function(msg, wParam)
 	if msg == 516 and wParam == 0 then
 		BlockOrder()
 	end
 end)
+]]
 
 
 id = 5
 scriptname = "SuicideBot"
 GoSTracker(scriptname,id)
 PrintChat(string.format("<font color=\"#85EDD7\"><b>Thanks for using |MvP|SuicideBot, have fun reaching your dead record. </b></font>"))
+PrintChat("Lock your screen (Y) for a better experience")
