@@ -1,7 +1,22 @@
+local version = "0.01"
+function AutoUpdate(data)
+    if tonumber(data) > tonumber(version) then
+        PrintChat("New Twisted Fate Version Found " .. data)
+        PrintChat("Downloading update, please wait...")
+        DownloadFileAsync("https://raw.githubusercontent.com/mvpgos/-MvP-GoS/master/MvPChampions/Suicide.lua", SCRIPT_PATH .. "SuicideBot.lua", function() PrintChat(string.format("<font color=\"#FC5743\"><b>Script Downloaded succesfully. please 2x f6</b></font>")) return end)
+    end
+end
+
+GetWebResultAsync("https://raw.githubusercontent.com/mvpgos/-MvP-GoS/master/MvPChampions/Suicide.version", AutoUpdate) 
 local azul
 local rojo
 local botaBasica = 0
 local botaRapidaQueFlipas = 0
+
+menu = MenuConfig("ThatBot", "|MvP|SuicideBot")
+menu:Menu("S", "Info and more")
+menu.S:Info("Ver", "Current Version: "..version.."")
+menu.S:Info("s", "Have Fun using this bot")
 
 OnTick(function(myHero)
 
@@ -46,4 +61,4 @@ OnDraw(function(myHero)
 	DrawCircle(myHero.pos, 350, 1,32,GoS.Red)
 end)
 
-PrintChat(string.format("<font color=\"#85EDD7\"><b>Thanks for using Suicide.lua, have fun reaching your dead record. </b></font>"))
+PrintChat(string.format("<font color=\"#85EDD7\"><b>Thanks for using |MvP|SuicideBot, have fun reaching your dead record. </b></font>"))
