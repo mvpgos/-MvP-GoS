@@ -1,4 +1,4 @@
-local version = "0.01"
+local version = "0.02"
 function AutoUpdate(data)
     if tonumber(data) > tonumber(version) then
         PrintChat("New Twisted Fate Version Found " .. data)
@@ -60,5 +60,12 @@ end)
 OnDraw(function(myHero)
 	DrawCircle(myHero.pos, 350, 1,32,GoS.Red)
 end)
+
+OnWndMsg(function(msg, wParam)
+	if msg == 516 and wParam == 0 then
+		BlockOrder()
+	end
+end)
+
 
 PrintChat(string.format("<font color=\"#85EDD7\"><b>Thanks for using |MvP|SuicideBot, have fun reaching your dead record. </b></font>"))
