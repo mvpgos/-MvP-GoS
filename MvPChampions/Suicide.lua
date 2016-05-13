@@ -1,4 +1,4 @@
-local version = "0.01"
+local version = "0.03"
 function AutoUpdate(data)
     if tonumber(data) > tonumber(version) then
         PrintChat("New Twisted Fate Version Found " .. data)
