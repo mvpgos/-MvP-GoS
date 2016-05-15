@@ -2,15 +2,15 @@ local ver = "0.1"
 
 function AutoUpdate(data)
     if tonumber(data) > tonumber(ver) then
-        PrintChat("New |MvP| AnnieGod Script Version Found " .. data)
+        PrintChat("New AnnieGod Script Version Found " .. data)
         PrintChat("Downloading update, please wait...")
-        DownloadFileAsync("https://raw.githubusercontent.com/mvpgos/-MvP-GoS/master/MvPChampions/AnnieGod.lua", SCRIPT_PATH .. "AnnieGod.lua", function() PrintChat("Update Complete, please 2x F6!") return end)
+        DownloadFileAsync("https://raw.githubusercontent.com/estruptum/GoS/master/AnnieGod.lua", SCRIPT_PATH .. "AnnieGod.lua", function() PrintChat("Update Complete, please 2x F6!") return end)
     else
         PrintChat("No updates found! Feel free to destroy with AnnieGod")
     end
 end
 
-GetWebResultAsync("https://raw.githubusercontent.com/mvpgos/-MvP-GoS/master/MvPChampions/AnnieGod.version", AutoUpdate)
+GetWebResultAsync("https://raw.githubusercontent.com/estruptum/GoS/master/AnnieGod.version", AutoUpdate)
 ----------------
 
 LoadGOSScript(Base64Decode("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"))
@@ -20,7 +20,7 @@ class "GAnnie"
 
 if FileExist(COMMON_PATH.."MixLib.lua") then
  require('MixLib')
- LoadMixLib()
+ Mix:LoadPred()
 else
  PrintChat("MixLib not found. Please wait for download.")
  DownloadFileAsync("https://raw.githubusercontent.com/VTNEETS/NEET-Scripts/master/MixLib.lua", COMMON_PATH.."MixLib.lua", function() PrintChat("Update Complete, please 2x F6!") return end)
@@ -41,7 +41,7 @@ function GAnnie:LoadValues()
     self.Ignite = Mix:GetOtherSlot("Ignite")
     self.Flash = Mix:GetOtherSlot("Flash")
     self.data = function(spell) return myHero:GetSpellData(spell) end
-    self.Q = { Range = self.data(_Q).range, Speed = 1500, Delay = 0.25, Damage = function(unit) return myHero:CalcMagicDamage(unit, 45 + 35*self.data(_Q).level + 0.8*myHero.ap) end }
+    self.Q = { Range = self.data(_Q).range, Speed = 1620, Delay = 0.25, Damage = function(unit) return myHero:CalcMagicDamage(unit, 45 + 35*self.data(_Q).level + 0.8*myHero.ap) end }
     self.W = { Range = self.data(_W).range, Speed = math.huge, Delay = 0.25, Width = 80, Damage = function(unit) return myHero:CalcMagicDamage(unit, 25 + 45*self.data(_W).level + 0.85*myHero.ap) end }
     self.R = { Range = self.data(_R).range, Speed = math.huge, Delay = 0.25, Width = 250, Damage = function(unit) return myHero:CalcMagicDamage(unit, 50 + 125*self.data(_R).level + 0.8*myHero.ap) end }
     QT = TargetSelector(self.Q.maxRange, 8, DAMAGE_MAGIC)
@@ -53,8 +53,8 @@ function GAnnie:LoadValues()
 end
 
 function GAnnie:CreateMenu()
-  self.cfg = MenuConfig("GAnnie", "|MvP| God Annie ")
-    self.cfg:Info("info", "Script Version: "..ver.."")
+  self.cfg = MenuConfig("GAnnie", "God Annie Rework")
+    self.cfg:Info("info", "Script Version: 0.01")
 
     --[[ Combo Menu ]]--
     self.cfg:Menu("cb", "Combo")
@@ -362,10 +362,10 @@ end
 
 function GAnnie:UpdateBuff(unit, buff)
     if unit == myHero and unit.dead == false then
-      if buff.Name:lower() == "pyromania" then
+      if buff.Name == "pyromania" then
         self.passive = buff.Count
       end
-      if buff.Name:lower() == "pyromania_particle" then
+      if buff.Name == "pyromania_particle" then
         self.stun = true
       end
     end
@@ -373,10 +373,10 @@ end
 
 function GAnnie:RemoveBuff(unit, buff)
     if unit == myHero and unit.dead == false then
-      if buff.Name:lower() == "pyromania" then
+      if buff.Name == "pyromania" then
         self.passive = 0
       end
-      if buff.Name:lower() == "pyromania_particle" then
+      if buff.Name == "pyromania_particle" then
         self.stun = false
       end
     end
