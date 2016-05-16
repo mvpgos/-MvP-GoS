@@ -285,12 +285,12 @@ local function GotItemReady(itemID)
 	end
 end
 
-local function CastOffensiveItems2()
+local function CastOffensiveItems2(unit)
 	IfTargetItemCastItem(3077)
 	IfTargetItemCastItem(3074)
-	IfTargetItemCastItem(3144, GetCurrentTarget())
-	IfTargetItemCastItem(3153, GetCurrentTarget())
-	IfTargetItemCastItem(3146, GetCurrentTarget())
+	IfTargetItemCastItem(3144, unit)
+	IfTargetItemCastItem(3153, unit)
+	IfTargetItemCastItem(3146, unit)
 	IfTargetItemCastItem(3748)
 	IfTargetItemCastItem(3142)
 end
