@@ -28,7 +28,6 @@ require("DamageLib")
 local Pantheon = Menu("MvP Pantheon", "MvP Pantheon")
 Pantheon:SubMenu("Combo", "["..myHero.charName.."] - Combo")
 	Pantheon.Combo:KeyBinding("Combo", "Combo", 32)
-	Pantheon.Combo:Boolean("mouse",'Follow Mouse', true)
 	Pantheon.Combo:Boolean("Q","use Q", true)
 	Pantheon.Combo:Boolean("W","use W", true)
 	Pantheon.Combo:Boolean("E","use E", true)
@@ -299,7 +298,7 @@ end
 local function Harass(unit)
 	Target = GetCurrentTarget()
 	if KeyIsDown(Pantheon.harass.harassKey:Key()) then
-		if ValidTarget(unit) and unit ~= nil then
+		if ValidTarget(unit, 600) and unit ~= nil then
 			if not isLow('Mana', myHero, Pantheon.harass.harassMana:Value()) then
 				--- Harass Mode 1 Q ---
 				if Pantheon.harass.hMode:Value() == 1 then
@@ -739,6 +738,11 @@ function MayorCombo()
 						end
 					end
 				end
+
+
+
+
+
 
 
 OnTick(function(myHero)
