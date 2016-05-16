@@ -34,15 +34,15 @@ Pantheon:SubMenu("Combo", "["..myHero.charName.."] - Combo")
 	Pantheon.Combo:Boolean("items", "use items", true)
 	Pantheon.Combo:DropDown("Logic", "Required Logic", 2, {"Simple Logic", "Advanced Logic", "GodLike Logic (Improving Stuff) -- choose under your own risk [kappa]"})
 Pantheon:SubMenu("harass", "["..myHero.charName.."] - Harass Settings")
-		Pantheon.harass:KeyBinding("harassKey", "Harass Key", string.byte("C"))
-		Pantheon.harass:Boolean("useQ", "Use (Q) in Harass", true)
-		Pantheon.harass:DropDown("hMode", "Harass Mode", 1, { "Q", "W+E" })
-		Pantheon.harass:Slider("harassMana", "Min. Mana Percent: ", 50, 0, 100)
+	Pantheon.harass:KeyBinding("harassKey", "Harass Key", string.byte("C"))
+	Pantheon.harass:Boolean("useQ", "Use (Q) in Harass", true)
+	Pantheon.harass:DropDown("hMode", "Harass Mode", 1, { "Q", "W+E" })
+	Pantheon.harass:Slider("harassMana", "Min. Mana Percent: ", 50, 0, 100)
 Pantheon:SubMenu("SubReq", "["..myHero.charName.."] - AutoLevel Settings")
-    Pantheon.SubReq:Boolean("LevelUp", "Level Up Skills", true)
-    Pantheon.SubReq:Slider("Start_Level", "Level to enable lvlUP", 1, 1, 17)
-    Pantheon.SubReq:DropDown("autoLvl", "Skill order", 1, {"Q-W-E","Q-W-Q","Q-E-W",})
-    Pantheon.SubReq:Boolean("Humanizer", "Enable Level Up Humanizer", true)
+ 	Pantheon.SubReq:Boolean("LevelUp", "Level Up Skills", true)
+    	Pantheon.SubReq:Slider("Start_Level", "Level to enable lvlUP", 1, 1, 17)
+    	Pantheon.SubReq:DropDown("autoLvl", "Skill order", 1, {"Q-W-E","Q-W-Q","Q-E-W",})
+    	Pantheon.SubReq:Boolean("Humanizer", "Enable Level Up Humanizer", true)
 Pantheon:SubMenu("drawing", "["..myHero.charName.."] - Draw Settings")
 	Pantheon.drawing:Boolean("mDraw", "Disable All Range Draws", false)
 	Pantheon.drawing:Boolean("HpPer", "Draw minions under 15%HP", true)
@@ -327,7 +327,7 @@ local function Combo()
 					CastQ(target)
 				end
 				if GetDistance(target, myHero) < AARange-23 and (GotItemReady(Hidra) or GotItemReady(Tiamat)) and Pantheon.Combo.items:Value() then
-					CastOffensiveItems2()
+					CastOffensiveItems2(target)
 				end
 				if Pantheon.Combo.W:Value() and WReady() and GetDistance(target) <= GetCastRange(myHero, 1) then
 					CastW(target)
@@ -339,7 +339,7 @@ local function Combo()
 					CastQ(target)
 				end
 				if GetDistance(target, myHero) < AARange-23 and (GotItemReady(Hidra) or GotItemReady(Tiamat)) and Pantheon.Combo.items:Value() then
-					CastOffensiveItems2()
+					CastOffensiveItems2(target)
 				end
 				if Pantheon.Combo.W:Value() and WReady() and GetDistance(target) <= GetCastRange(myHero, 1) then
 					CastW(target)
@@ -457,7 +457,7 @@ function MayorCombo()
 		-- another was here
 			if Pantheon.Combo.Logic:Value() == 2 then
 				if GetDistance(target, myHero) < AARange-23 and (GotItemReady(Hidra) or GotItemReady(Tiamat)) and Pantheon.Combo.items:Value() then
-					CastOffensiveItems2()
+					CastOffensiveItems2(target)
 				end
 				if QReady() and ValidTarget(target, QRange) then
 					if Escudo == 1 and EnemiesAround(myHero, 1700) == 1 then
@@ -599,9 +599,9 @@ function MayorCombo()
 						if not WReady() and EReady() then
 							DelayAction(function()
 								if GetDistance(target) < AARange-23 and (GotItemReady(Hidra) or GotItemReady(Tiamat)) and Pantheon.Combo.items:Value() then
-									CastOffensiveItems2()
+									CastOffensiveItems2(target)
 								elseif GetDistance(target) > AARange then
-									CastOffensiveItems2()
+									CastOffensiveItems2(target)
 								end
 							end, 0.01)
 
@@ -628,9 +628,9 @@ function MayorCombo()
 						elseif not WReady() and not EReady() and QReady() then
 							DelayAction(function()
 								if GetDistance(target) < AARange-23 and (GotItemReady(Hidra) or GotItemReady(Tiamat)) and Pantheon.Combo.items:Value() then
-									CastOffensiveItems2()
+									CastOffensiveItems2(target)
 								elseif GetDistance(target) > AARange then
-									CastOffensiveItems2()
+									CastOffensiveItems2(target)
 								end
 							end, 0.01)
 							DelayAction(function()
@@ -713,7 +713,7 @@ function MayorCombo()
 							end
 						elseif NothingReady() then
 								InAA()
-								CastOffensiveItems2()
+								CastOffensiveItems2(target)
 						elseif EReady() then
 							if Escudo == 1 and EnemiesAround(myHero, 1700) == 1 then
 								CastE(target)
