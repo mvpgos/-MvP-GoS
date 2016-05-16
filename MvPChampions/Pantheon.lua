@@ -152,7 +152,7 @@ local function SkillDrawings()
 end
 
 local function AutoSkillLevelUp()
-	if GetLevel(myHero) ~= 18 then
+	if GetLevel(myHero) < 19 then
 		if Pantheon.SubReq.LevelUp:Value() and GetLevelPoints(myHero) >= 1 and GetLevel(myHero) >= Pantheon.SubReq.Start_Level:Value() then
 		    if Pantheon.SubReq.Humanizer:Value() then
 		        DelayAction(function() LevelSpell(LevelUpTable[Pantheon.SubReq.autoLvl:Value()][GetLevel(myHero)-GetLevelPoints(myHero)+1]) end, math.random(0.3286,1.33250))
