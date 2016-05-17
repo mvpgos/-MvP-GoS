@@ -264,7 +264,7 @@ local function InAA(unit)
 	end
 end
 
-local function IfTargetItemCastItem(itemID, unit)
+local function WhileTarget(itemID, unit)
 	if GetItemSlot(myHero, itemID) > 0 then
 		if not unit then unit = myHero end
 		if CanUseSpell(myHero, GetItemSlot(myHero, itemID)) == READY then
@@ -286,13 +286,13 @@ local function GotItemReady(itemID)
 end
 
 local function CastOffensiveItems2(unit)
-	IfTargetItemCastItem(3077)
-	IfTargetItemCastItem(3074)
-	IfTargetItemCastItem(3144, unit)
-	IfTargetItemCastItem(3153, unit)
-	IfTargetItemCastItem(3146, unit)
-	IfTargetItemCastItem(3748)
-	IfTargetItemCastItem(3142)
+	WhileTarget(3077)
+	WhileTarget(3074)
+	WhileTarget(3144, unit)
+	WhileTarget(3153, unit)
+	WhileTarget(3146, unit)
+	WhileTarget(3748)
+	WhileTarget(3142)
 end
 
 local function Harass(unit)
