@@ -323,30 +323,24 @@ local function Combo()
 	target = GetCurrentTarget()
 	if Pantheon.Combo.Combo:Value() then
 		if Pantheon.Combo.Logic:Value() == 1 then
-				if Pantheon.Combo.Q:Value() and QReady() and GetDistance(target) <= GetCastRange(myHero, 0) then
-					CastQ(target)
-				end
-				if GetDistance(target, myHero) < AARange-23 and (GotItemReady(Hidra) or GotItemReady(Tiamat)) and Pantheon.Combo.items:Value() then
-					CastOffensiveItems2(target)
-				end
-				if Pantheon.Combo.W:Value() and WReady() and GetDistance(target) <= GetCastRange(myHero, 1) then
-					CastW(target)
-				end
-				if Pantheon.Combo.E:Value() and EReady() and GetDistance(target) <= GetCastRange(myHero, 2)-40 then
-					CastE(target)
-				end
-				if Pantheon.Combo.Q:Value() and QReady() and GetDistance(target) <= GetCastRange(myHero, 0) then
-					CastQ(target)
-				end
-				if GetDistance(target, myHero) < AARange-23 and (GotItemReady(Hidra) or GotItemReady(Tiamat)) and Pantheon.Combo.items:Value() then
-					CastOffensiveItems2(target)
-				end
-				if Pantheon.Combo.W:Value() and WReady() and GetDistance(target) <= GetCastRange(myHero, 1) then
-					CastW(target)
-				end
-				if Pantheon.Combo.E:Value() and EReady() and GetDistance(target) <= GetCastRange(myHero, 2)-40 then
-					CastE(target)
-				end
+			if Pantheon.Combo.Q:Value() and QReady() and GetDistance(target) <= GetCastRange(myHero, 0) then
+				CastQ(target)
+			end
+			if GetDistance(target, myHero) < AARange-23 and (GotItemReady(Hidra) or GotItemReady(Tiamat)) and Pantheon.Combo.items:Value() then
+				CastOffensiveItems2(target)
+			end
+			if Pantheon.Combo.W:Value() and WReady() and GetDistance(target) <= GetCastRange(myHero, 1) then
+				CastW(target)
+			end
+			if Pantheon.Combo.E:Value() and EReady() and GetDistance(target) <= GetCastRange(myHero, 2)-40 then
+				CastE(target)
+			end
+			if Pantheon.Combo.Q:Value() and QReady() and GetDistance(target) <= GetCastRange(myHero, 0) then
+				CastQ(target)
+			end
+			if GetDistance(target, myHero) < AARange-23 and (GotItemReady(Hidra) or GotItemReady(Tiamat)) and Pantheon.Combo.items:Value() then
+				CastOffensiveItems2(target)
+			end
 		end
 	end
 end
