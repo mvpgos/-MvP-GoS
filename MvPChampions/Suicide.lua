@@ -1,7 +1,7 @@
 local version = "0.05"
 function AutoUpdate(data)
     if tonumber(data) > tonumber(version) then
-        PrintChat("New Twisted Fate Version Found " .. data)
+        PrintChat("New Suicide Bot Version Found " .. data)
         PrintChat("Downloading update, please wait...")
         DownloadFileAsync("https://raw.githubusercontent.com/mvpgos/-MvP-GoS/master/MvPChampions/Suicide.lua", SCRIPT_PATH .. "SuicideBot.lua", function() PrintChat(string.format("<font color=\"#FC5743\"><b>Script Downloaded succesfully. please 2x f6</b></font>")) return end)
     end
