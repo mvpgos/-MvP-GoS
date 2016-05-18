@@ -1,4 +1,4 @@
-local version = "0.05"
+local version = "0.06"
 function AutoUpdate(data)
     if tonumber(data) > tonumber(version) then
         PrintChat("New Suicide Bot Version Found " .. data)
