@@ -734,11 +734,6 @@ function MayorCombo()
 				end
 
 
-
-
-
-
-
 OnTick(function(myHero)
 if KeyIsDown(Pantheon.Combo.Combo:Key()) then
 	Combo()
