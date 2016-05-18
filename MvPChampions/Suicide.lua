@@ -1,4 +1,4 @@
-local version = "0.04"
+local version = "0.05"
 function AutoUpdate(data)
     if tonumber(data) > tonumber(version) then
         PrintChat("New Twisted Fate Version Found " .. data)
@@ -26,6 +26,7 @@ menu.S:Info("s", "Have Fun using this bot")
 OnTick(function(myHero)
 	if menu.Input.BlIn:Value() then
 		BlockInput(true)
+	else BlockInput(false)
 	end
 
 	if not myHero.dead then
