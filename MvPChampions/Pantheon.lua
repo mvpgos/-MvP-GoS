@@ -204,7 +204,7 @@ local function HealMeHealAlly()
 				end
 					
 				if realheals and Settings.heal.ally:Value() then
-					local ally = Teemo:findClosestAlly(myHero)
+					local ally = self:findClosestAlly(myHero)
 					if ally and not ally.dead and GetDistance(ally) < 850 then
 						if  GetCurrentHP(ally)/GetMaxHP(ally) < Settings.heal.health:value()/100 then
 							CastSpell(heal)
