@@ -1,4 +1,4 @@
-local version = "0.06"
+local version = "0.07"
 function AutoUpdate(data)
     if tonumber(data) > tonumber(version) then
         PrintChat("New Suicide Bot Version Found " .. data)
@@ -70,7 +70,7 @@ OnWndMsg(function(msg, wParam)
 	end
 end)
 ]]
-id = 5
+id = 11
 scriptname = "SuicideBot"
 GoSTracker(scriptname,id)
 PrintChat(string.format("<font color=\"#85EDD7\"><b>Thanks for using |MvP|SuicideBot, have fun reaching your dead record. </b></font>"))
