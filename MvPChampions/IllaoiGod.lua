@@ -2,7 +2,7 @@
 require("OpenPredict")
 require("DamageLib")
 
-local version = "0.13"
+local version = "0.14"
 function AutoUpdate(data)
     if tonumber(data) > tonumber(version) then
         PrintChat("New Illaoi Version Found " .. data)
